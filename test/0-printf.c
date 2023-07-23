@@ -20,8 +20,7 @@ int _printf(const char *format, ...)
 		return (-1);
 	if (format[0] == '%' && format[1] == '\0')
 		return (-1);
-
-	ret = strlen(format);
+	ret = 0;
 
 	va_start(args, format);
 	for (i = 0; format[i] != '\0'; i++)
@@ -32,19 +31,31 @@ int _printf(const char *format, ...)
 		{
 			n = 1;
 			if (format[i + n] == 'c')
-				putchar(va_arg(args, int));
+			{
+				ret += print_char(va_arg(args, int));
+			}
 			else if (format[i + n] == 's')
-				print_str(va_arg(args, char *));
+				ret += print_str(va_arg(args, char *));
 			else if (format[i + n] == '%')
+			{
+				ret += 1;
 				putchar('%');
+			}
 			else if (format[i + n] == ' ')
-				return (-1);
-
+				return (ret);
+			else
+			{
+				putchar(format[i]);
+				ret += 1;
+			}
 			i += n;
 
 		}
 		else
+		{
 			putchar(format[i]);
+			ret += 1;
+		}
 	}
 	va_end(args);
 	return (ret);
@@ -59,20 +70,39 @@ int _printf(const char *format, ...)
 
 int print_str(char *str)
 {
+	int len;
 	char *p = str;
 
 	if (str == NULL)
 	{	
-		print_str("(nil)");
-		return (1);
+		len = print_str("(null)");
+		return (len);
 	}
 
 	else if (str[0] == '\0')
 	{
-		return(1);
+		return(0);
 	}
 
 	for (; *p != '\0'; p++)
 		putchar (*p);
-	return (1);
+	len = strlen(str);
+	return (len);
+}
+
+
+/**
+  *print_char - used to print character
+  *@ch: character to print
+  *
+  *Return: integer value count of char
+*/
+
+int print_char(int ch)
+{
+	putchar(ch);
+
+	if (ch == 0)
+		return (0);
+	return(1);
 }
