@@ -19,12 +19,16 @@ int _printf(const char *format, ...)
 
 	if (format == NULL || format[0] == '\0')
 		return (-1);
+	if(format[0] == '%' && format[1] == '\0')
+		return (-1);
 
 	ret = strlen(format);
 
 	va_start(args, format);
 	for (i = 0; format[i] != '\0'; i++)
 	{
+		/*if (format[i] = '%' && format[i + 1] == ' ')*/
+
 		if (format[i] == '%')
 		{
 			n = 1;
@@ -32,6 +36,8 @@ int _printf(const char *format, ...)
 				putchar(va_arg(args, int));
 			else if (format[i + n] == 's')
 				print_str(va_arg(args, char *));
+			else if (format[i + n] == '%')
+				putchar('%');
 
 			i += n;
 
