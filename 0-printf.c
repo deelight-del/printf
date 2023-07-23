@@ -41,8 +41,6 @@ int _printf(const char *format, ...)
 				ret += 1;
 				putchar('%');
 			}
-			else if (format[i + n] == ' ')
-				return (ret);
 			else
 			{
 				putchar(format[i]);
