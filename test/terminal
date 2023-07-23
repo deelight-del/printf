@@ -20,6 +20,7 @@ int _printf(const char *format, ...)
 		return (-1);
 	if (format[0] == '%' && format[1] == '\0')
 		return (-1);
+
 	ret = 0;
 
 	va_start(args, format);
@@ -32,22 +33,15 @@ int _printf(const char *format, ...)
 			n = 1;
 			if (format[i + n] == 'c')
 			{
-				ret += print_char(va_arg(args, int));
+				ret += print_char(va_args(args, char);
 			}
 			else if (format[i + n] == 's')
 				ret += print_str(va_arg(args, char *));
 			else if (format[i + n] == '%')
-			{
-				ret += 1;
 				putchar('%');
-			}
 			else if (format[i + n] == ' ')
 				return (ret);
-			else
-			{
-				putchar(format[i]);
-				ret += 1;
-			}
+
 			i += n;
 
 		}
@@ -75,7 +69,7 @@ int print_str(char *str)
 
 	if (str == NULL)
 	{	
-		len = print_str("(null)");
+		len = print_str("(nil)");
 		return (len);
 	}
 
@@ -98,11 +92,13 @@ int print_str(char *str)
   *Return: integer value count of char
 */
 
-int print_char(int ch)
+int print_char(char ch)
 {
+	int ret;
+
 	putchar(ch);
 
-	if (ch == 0)
-		return (0);
-	return(1);
+	ch != NULL ? ret = 1 : ret = 0;
+
+	return (ret);
 }

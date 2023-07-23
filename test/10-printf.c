@@ -43,11 +43,6 @@ int _printf(const char *format, ...)
 			}
 			else if (format[i + n] == ' ')
 				return (ret);
-			else
-			{
-				putchar(format[i]);
-				ret += 1;
-			}
 			i += n;
 
 		}
