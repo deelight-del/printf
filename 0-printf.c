@@ -1,5 +1,4 @@
 #include <stdio.h>
-#include <stdlib.h>
 #include "main.h"
 #include <string.h>
 #include <stdarg.h>
@@ -19,7 +18,7 @@ int _printf(const char *format, ...)
 
 	if (format == NULL || format[0] == '\0')
 		return (-1);
-	if(format[0] == '%' && format[1] == '\0')
+	if (format[0] == '%' && format[1] == '\0')
 		return (-1);
 
 	ret = strlen(format);
@@ -51,15 +50,18 @@ int _printf(const char *format, ...)
 
 /**
   *print_str - used to print a string within string
-  *@ch:- string to print
+  *@str:- string to print
   *
   *Return: null
 */
 
-void print_str(char *ch)
+void print_str(char *str)
 {
 	char *p;
 
-	for (p = ch; *p != '\0'; p++)
-		putchar (*p);
+	if (str == NULL)
+		print_str("null");
+
+	for (p = str; *p != '\0'; p++)
+		putchar (*str);
 }
