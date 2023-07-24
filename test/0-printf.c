@@ -23,18 +23,11 @@ int _printf(const char *format, ...)
 	va_start(args, format);
 	for (i = 0; format[i] != '\0'; i++)
 	{
-		/*if (format[i] = '%' && format[i + 1] == ' ')*/
-
 		if (format[i] == '%')
 		{
 			n = 1;
-			if (format[i + n] == 'c')
-			{
-				ret += print_char(va_arg(args, int));
-			}
-			else if (format[i + n] == 's')
-				ret += print_str(va_arg(args, char *));
-			else if (format[i + n] == '%')
+			ret += get_specifiers(format[i + n], args);
+			if (format[i + n] == '%')
 			{
 				ret += 1;
 				putchar('%');
@@ -59,15 +52,16 @@ int _printf(const char *format, ...)
 
 /**
   *print_str - used to print a string within string
-  *@str:- string to print
+  *@list:- list of va_list
   *
   *Return: null
 */
 
-int print_str(char *str)
+int print_str(va_list list)
 {
+	char *str = va_arg(list, char *);
 	int len;
-	char *p = str;
+	char *p;
 
 	if (str == NULL)
 	{	
@@ -80,7 +74,7 @@ int print_str(char *str)
 		return(0);
 	}
 
-	for (; *p != '\0'; p++)
+	for (p = str; *p != '\0'; p++)
 		putchar (*p);
 	len = strlen(str);
 	return (len);
@@ -89,13 +83,15 @@ int print_str(char *str)
 
 /**
   *print_char - used to print character
-  *@ch: character to print
+  *@list : list of va_list
   *
   *Return: integer value count of char
 */
 
-int print_char(int ch)
+int print_char(va_list list)
 {
+	int ch = va_arg(list, int);
+
 	putchar(ch);
 
 	if (ch == 0)

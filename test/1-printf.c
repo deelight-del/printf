@@ -49,13 +49,14 @@ int int_count(int num)
 
 /**
   *print_count_int - Function to print and count integer
-  *@num: The number to count and print
+  *@va_list: list of va_list
   *
   *Return: Returns the count of integer
 */
 
-int print_count_int(int num)
+int print_count_int(va_list list)
 {
+	int num = va_arg(list, int);
 	int ret;
 
 	print_int(num);
