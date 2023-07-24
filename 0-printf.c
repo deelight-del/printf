@@ -23,29 +23,21 @@ int _printf(const char *format, ...)
 	va_start(args, format);
 	for (i = 0; format[i] != '\0'; i++)
 	{
-		/*if (format[i] = '%' && format[i + 1] == ' ')*/
-
 		if (format[i] == '%')
 		{
 			n = 1;
-			if (format[i + n] == 'c')
+			if (format[i + n] == 'c' || format[i + n] == 's' ||
+					format[i + n] == 'd' || format[i + n] == 'd' ||
+					format[i + n] == '%')
 			{
-				ret += print_char(va_arg(args, int));
-			}
-			else if (format[i + n] == 's')
-				ret += print_str(va_arg(args, char *));
-			else if (format[i + n] == '%')
-			{
-				ret += 1;
-				putchar('%');
+				ret += get_specifiers(format[i + n], args);
+				i += n;
 			}
 			else
 			{
 				putchar(format[i]);
 				ret += 1;
 			}
-			i += n;
-
 		}
 		else
 		{
@@ -59,19 +51,20 @@ int _printf(const char *format, ...)
 
 /**
   *print_str - used to print a string within string
-  *@str:- string to print
+  *@list:- list of va_list
   *
   *Return: null
 */
 
-int print_str(char *str)
+int print_str(va_list list)
 {
+	char *str = va_arg(list, char *);
 	int len;
-	char *p = str;
+	char *p;
 
 	if (str == NULL)
 	{
-		len = print_str("(null)");
+		len = print_null("(null)");
 		return (len);
 	}
 
@@ -80,7 +73,25 @@ int print_str(char *str)
 		return (0);
 	}
 
-	for (; *p != '\0'; p++)
+	for (p = str; *p != '\0'; p++)
+		putchar (*p);
+	len = strlen(str);
+	return (len);
+}
+
+/**
+  *print_null - to print stirng, especially null
+  *@str: null in our case
+  *
+  *Return: int of count of string
+*/
+
+int print_null(char *str)
+{
+	int len;
+	char *p;
+
+	for (p = str; *p != '\0'; p++)
 		putchar (*p);
 	len = strlen(str);
 	return (len);
@@ -89,16 +100,33 @@ int print_str(char *str)
 
 /**
   *print_char - used to print character
-  *@ch: character to print
+  *@list : list of va_list
   *
   *Return: integer value count of char
 */
 
-int print_char(int ch)
+int print_char(va_list list)
 {
+	int ch = va_arg(list, int);
+
 	putchar(ch);
 
 	if (ch == 0)
 		return (0);
+	return (1);
+}
+
+/**
+  *print_percent - function to print %
+  *@list: list of va_list
+  *
+  *Return: integer 1
+*/
+
+int print_percent(va_list list)
+{
+	(void)list;
+
+	putchar ('%');
 	return (1);
 }

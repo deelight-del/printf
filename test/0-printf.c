@@ -26,19 +26,18 @@ int _printf(const char *format, ...)
 		if (format[i] == '%')
 		{
 			n = 1;
-			ret += get_specifiers(format[i + n], args);
-			if (format[i + n] == '%')
+			if (format[i + n] == 'c' || format[i + n] == 's' ||
+					format[i + n] == 'd' || format[i + n] == 'd' ||
+					format[i + n] == '%')
 			{
-				ret += 1;
-				putchar('%');
+				ret += get_specifiers(format[i + n], args);
+				i += n;
 			}
 			else
 			{
 				putchar(format[i]);
 				ret += 1;
 			}
-			i += n;
-
 		}
 		else
 		{
@@ -64,15 +63,33 @@ int print_str(va_list list)
 	char *p;
 
 	if (str == NULL)
-	{	
-		len = print_str("(null)");
+	{
+		len = print_null("(null)");
 		return (len);
 	}
 
 	else if (str[0] == '\0')
 	{
-		return(0);
+		return (0);
 	}
+
+	for (p = str; *p != '\0'; p++)
+		putchar (*p);
+	len = strlen(str);
+	return (len);
+}
+
+/**
+  *print_null - to print stirng, especially null
+  *@str: null in our case
+  *
+  *Return: int of count of string
+*/
+
+int print_null(char *str)
+{
+	int len;
+	char *p;
 
 	for (p = str; *p != '\0'; p++)
 		putchar (*p);
@@ -96,5 +113,20 @@ int print_char(va_list list)
 
 	if (ch == 0)
 		return (0);
-	return(1);
+	return (1);
+}
+
+/**
+  *print_percent - function to print %
+  *@list: list of va_list
+  *
+  *Return: integer 1
+*/
+
+int print_percent(va_list list)
+{
+	(void)list;
+
+	putchar ('%');
+	return (1);
 }

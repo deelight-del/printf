@@ -10,6 +10,8 @@ int int_count(int num);
 int print_count_int(va_list list);
 bool isformatvalid(const char *format);
 int get_specifiers(char, va_list);
+int print_null(char *str);
+int print_percent(va_list list);
 
 typedef struct spec
 {
