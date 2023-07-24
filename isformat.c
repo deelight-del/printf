@@ -38,12 +38,12 @@ bool isformatvalid(const char *format)
 					{
 						break;
 					}
-			/**
-			* default:
-			*		{
-			*			return (false);
-			*		}
-			*/
+				/**
+				*default:
+				*	{
+				*		return (false);
+				*	}
+				*/
 			}
 		}
 		format++;
