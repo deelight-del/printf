@@ -16,9 +16,7 @@ int _printf(const char *format, ...)
 	int ret, i, n;
 	va_list args;
 
-	if (format == NULL || format[0] == '\0')
-		return (-1);
-	if (format[0] == '%' && format[1] == '\0')
+	if (!isformatvalid(format))
 		return (-1);
 	ret = 0;
 
@@ -72,14 +70,14 @@ int print_str(char *str)
 	char *p = str;
 
 	if (str == NULL)
-	{	
+	{
 		len = print_str("(null)");
 		return (len);
 	}
 
 	else if (str[0] == '\0')
 	{
-		return(0);
+		return (0);
 	}
 
 	for (; *p != '\0'; p++)
@@ -102,5 +100,5 @@ int print_char(int ch)
 
 	if (ch == 0)
 		return (0);
-	return(1);
+	return (1);
 }

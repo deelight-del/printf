@@ -21,7 +21,7 @@ int main(void)
 	printf("%d\n", len);
 	len = _printf("This %% is a %s/%s boy%c\n", "good", "bad", 's');
 	printf("%d\n", len);
-	len = _printf("Africa leadership is abbrev as %c%c%c%", 'A', 'L', 'X');
+	len = _printf("Africa leadership is abbrev as %c%c%c", 'A', 'L', 'X');
 	printf("%d\n", len);
 	len = _printf("%c\n", 'A');
 	printf("%d\n", len);

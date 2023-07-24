@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <ctype.h>
+#include <string.h>
 /**
  *isformat_valid - function to print the format string, and with respective
  * formatting specifier.

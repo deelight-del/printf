@@ -9,9 +9,10 @@
  *
  * Return: nothing
  */
-	void
-print_int (int num)
+void print_int(int num)
 {
+	int ch;
+
 	if (num < 0)
 	{
 		putchar('-');
@@ -20,53 +21,45 @@ print_int (int num)
 
 	if (num / 10)
 		print_int(num / 10);
-
-	putchar(num % 10 + '0');
+	ch = (num % 10) + 48;
+	putchar(ch);
 }
+
 /**
- *_printf - function to print integers
- * @format: formatting specifier.
- * Return: length of format string
- *
- */
-	int _printf(const char *format, ...)
+  *int_count - counting the number of integers present
+  *@num: The integer to print
+  *
+  *Return: The number of int is printed
+*/
+
+int int_count(int num)
 {
-	 va_list args;
-	 int i, ret, length, ch;
+	int i = 1;
 
-	 ret = 0;
-
-	if (format == NULL || format[0] == '\0')
-		return (-1);
-	if (format[0] == '%' && format[1] == '\0')
-		return (-1);
-
-	va_start(args, format);
-
-	length = strlen(format);
-
-	for (i = 0; i < length; i++)
+	if (num < 0)
 	{
-		if (format[i] == '%')
-		{
-			i++;
-
-			if (i >= length)
-				break;
-
-			else if (format[i] == 'i' || format[i] == 'd')
-			{
-				ch = va_arg(args, int);
-				print_int(ch);
-				ret++;
-			}
-		}
-		else
-		{
-			putchar(format[i]);
-		}
+		num = -num;
+		i++;
 	}
 
-	va_end(args);
+	for (; num / 10; i++)
+		num /= 10;
+	return (i);
+}
+
+/**
+  *print_count_int - Function to print and count integer
+  *@num: The number to count and print
+  *
+  *Return: Returns the count of integer
+*/
+
+int print_count_int(int num)
+{
+	int ret;
+
+	print_int(num);
+	ret = int_count(num);
+
 	return (ret);
 }
