@@ -5,4 +5,4 @@ function to print the format string, with %s %c.
 1-printf.c.
 function to print the format string, with %i and %d.
 my second
-
+my third
