@@ -27,7 +27,7 @@ int _printf(const char *format, ...)
 		{
 			n = 1;
 			if (format[i + n] == 'c' || format[i + n] == 's' ||
-					format[i + n] == 'd' || format[i + n] == 'd' ||
+					format[i + n] == 'd' || format[i + n] == 'i' ||
 					format[i + n] == '%')
 			{
 				ret += get_specifiers(format[i + n], args);
