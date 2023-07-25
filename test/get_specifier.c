@@ -1,16 +1,16 @@
 #include <stdio.h>
 #include "main.h"
-
 /**
  *get_specifiers - get respective function for individual specifier
- * @s: specifier of character
- * @list: list of va_list type
- *
+ * @c: specifier of character
+ * @args: list of va_list type
+ * @buf: Buffer to be printed
  * Return: an integer to return the specifier
  */
 int get_specifiers(char c, Buffer *buf, va_list *args)
 {
 	int ret = 0;
+
 	switch (c)
 	{
 		case 's':
@@ -33,5 +33,5 @@ int get_specifiers(char c, Buffer *buf, va_list *args)
 				print_buffer(buf);
 			ret += 2;
 	}
-	return ret;
+	return (ret);
 }
