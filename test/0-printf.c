@@ -1,5 +1,6 @@
 #include <string.h>
 #include <stdarg.h>
+#include <stdlib.h>
 #include "main.h"
 /**
  *_printf - function to print the format string, and with respective
@@ -9,8 +10,9 @@
  *Return: length of format string
  */
 
-int _printf(const char *format, va_list args)
+int _printf(const char *format, ...)
 {
+	va_list args;
 	int ret;
 
 	Buffer *buf;
@@ -93,10 +95,8 @@ int print_str(Buffer *buf, va_list list)
 int print_null(Buffer *buf, va_list v_ls)
 {
 	int c;
-	iuffer *buf;
 
 	c = va_arg(v_ls, int);
-	Buffec *buf;
 
 	buf->str[buf->index++] = c;
 

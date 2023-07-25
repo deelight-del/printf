@@ -23,7 +23,7 @@ typedef struct spec
 	char op;
 	int (*ptr_func)(Buffer*, va_list);
 } spec;
-int _printf(const char *format, va_list list);
+int _printf(const char *format, ...);
 int print_str(Buffer *buf, va_list v_ls);
 int get_specifiers(char, Buffer *, va_list *);
 int print_null(Buffer *buf,va_list list);
