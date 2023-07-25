@@ -1,132 +1,129 @@
-#include <stdio.h>
+
 #include "main.h"
 #include <string.h>
 #include <stdarg.h>
 
 /**
-  *_printf - function to print the format string, and with respective
-  *formatting specifier.
-  *@format: this is the string containing the format and string to print
-  *
-  *Return: length of format string
-*/
+ *_printf - function to print the format string, and with respective
+ *formatting specifier.
+ *@format: this is the string containing the format and string to print
+ *
+ *Return: length of format string
+ */
 
 int _printf(const char *format, ...)
 {
+	if (isformatvalid(format))
+		return (-1);
+
 	int ret, i, n;
 	va_list args;
-
-	if (!isformatvalid(format))
+	Buffer *buf;
+	buf = new_buffer();
+	if (!buf)
 		return (-1);
+
 	ret = 0;
 
 	va_start(args, format);
-	for (i = 0; format[i] != '\0'; i++)
+	while (format && format[buf->index])
 	{
-		if (format[i] == '%')
+		if (format[buf->index] == '%')
 		{
-			n = 1;
-			if (format[i + n] == 'c' || format[i + n] == 's' ||
-					format[i + n] == 'd' || format[i + n] == 'd' ||
-					format[i + n] == '%')
-			{
-				ret += get_specifiers(format[i + n], args);
-				i += n;
-			}
-			else
-			{
-				putchar(format[i]);
-				ret += 1;
-			}
+			buf->index++;
+			ret += get_specifiers(format[buf->index],buf,&args);
+			buf->index++;
 		}
 		else
 		{
-			putchar(format[i]);
-			ret += 1;
-		}
+			buf->str[buf->index++] = format[ret];
+			if (buf->index == buf->size - 1)
+				print_buffer(buf);
+			ret++;
+		}	    
 	}
 	va_end(args);
+	print_buffer(buf);
+	ret += buf->index;
+	free(buf->str);
+	free(buf);	
 	return (ret);
 }
 
 /**
-  *print_str - used to print a string within string
-  *@list:- list of va_list
-  *
-  *Return: null
-*/
+ *print_str - used to print a string within string
+ *@list:- list of va_list
+ *
+ *Return: null
+ */
 
-int print_str(va_list list)
+int print_str(Buffer *buf ,va_list list)
 {
-	char *str = va_arg(list, char *);
-	int len;
-	char *p;
+	size_t i;
 
-	if (str == NULL)
+	char* str = va_arg(list, char*);
+
+	if (!str)
+		return print_null(buf,list);
+
+	i = 0;
+	while (str[i])
 	{
-		len = print_null("(null)");
-		return (len);
+		buf->str[buf->index++] = str[i++];
+		if (buf->index == buf->size - 1)
+			print_buffer(buf);
 	}
-
-	else if (str[0] == '\0')
-	{
-		return (0);
-	}
-
-	for (p = str; *p != '\0'; p++)
-		putchar (*p);
-	len = strlen(str);
-	return (len);
+	return i;
 }
 
-/**
-  *print_null - to print stirng, especially null
-  *@str: null in our case
-  *
-  *Return: int of count of string
-*/
-
-int print_null(char *str)
+int print_null(Buffer *buf, va_list v_ls )
 {
-	int len;
-	char *p;
+	char c;
 
-	for (p = str; *p != '\0'; p++)
-		putchar (*p);
-	len = strlen(str);
-	return (len);
+	c = va_arg(v_ls, int);
+	buf->str[buf->index++] = c;
+
+	if (buf->index == buf->size - 1)
+		print_buffer(buf);
+
+	return 1;
 }
 
 
 /**
-  *print_char - used to print character
-  *@list : list of va_list
-  *
-  *Return: integer value count of char
-*/
+ *print_char - used to print character
+ *@list : list of va_list
+ *
+ *Return: integer value count of char
+ */
 
-int print_char(va_list list)
+int print_char(Buffer *buf,va_list list)
 {
-	int ch = va_arg(list, int);
+	char c;
 
-	putchar(ch);
+	c = va_arg(list, int);
 
-	if (ch == 0)
-		return (0);
+	buf->str[buf->index++] = c;
+
+	if (buf->index == buf->size - 1)
+		print_buffer(buf);	
+
 	return (1);
 }
 
 /**
-  *print_percent - function to print %
-  *@list: list of va_list
-  *
-  *Return: integer 1
-*/
+ *print_percent - function to print %
+ *@list: list of va_list
+ *
+ *Return: integer 1
+ */
 
-int print_percent(va_list list)
+int print_percent(Buffer *buf ,va_list list)
 {
-	(void)list;
+	buf->str[buf->index++] = '%';
 
-	putchar ('%');
-	return (1);
+	if (buf->index == buf->size - 1)
+		print_buffer(buf);
+
+	return 1;
 }
