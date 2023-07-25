@@ -18,6 +18,8 @@ int get_specifiers(char s, va_list list)
 		{'d', print_count_int},
 		{'i', print_count_int},
 		{'%', print_percent},
+		{'b', print_binary},
+		{'u', print_count_u},
 		{'\0', NULL}
 	};
 

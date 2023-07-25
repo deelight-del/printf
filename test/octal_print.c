@@ -13,9 +13,9 @@ void call_var(int n, ...)
 
 	for (i = 0; i < n; i++)
 	{
-		len = print_count_u(list);
+		len = print_count_octal(list);
 		printf("\n");
-		printf("%d", len);
+		printf("The length of above printed number is given as: %d\n", len);
 		printf("\n");
 	}
 }
@@ -23,7 +23,7 @@ void call_var(int n, ...)
 int main(void)
 {
 	call_var(1, 1234);
-	call_var(4, 0, -0, -90, 10000);
+	call_var(6, 0, 1, 2, 3, 8, -200);
 
 	return (0);
 }

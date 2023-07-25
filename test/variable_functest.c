@@ -21,12 +21,15 @@ int print_int(int count, ...)
 
 void helper_func(va_list list)
 {
-	putchar(va_arg(list, int) + 48);
+	int num;
+
+	num = va_arg(list, int);
+	putchar(num + 48);
 }
 
 int main(void)
 {
-	print_int(4, 1, 2, 3, 4);
+	print_int(4, NULL, 2, 3, 4);
 	printf("\n");
 
 	return (0);
