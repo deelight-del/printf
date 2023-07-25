@@ -13,7 +13,7 @@
 
 int _printf(const char *format, ...)
 {
-	if (isformatvalid(format))
+	if (!isformatvalid(format))
 		return (-1);
 
 	int ret, i, n;
@@ -64,66 +64,75 @@ int print_str(Buffer *buf ,va_list list)
 	char* str = va_arg(list, char*);
 
 	if (!str)
-		return print_null(buf,list);
-
+		str = "(nill)";
 	i = 0;
 	while (str[i])
 	{
-		buf->str[buf->index++] = str[i++];
+			if (str[i] == '\\' && str[i + 1] == 'n')
+			{
+				buf->str[buf->index++] = '\n';
+				i += 2;
+			}
+			else if (str[i] == '\\' && str[i + 1] == '\\')
+			{
+				buf->str[buf->index++] = '\\';
+				i += 2;
+			}	  
+			buf->str[buf->index++] = str[i++];
+			if (buf->index == buf->size - 1)
+				print_buffer(buf);
+		}
+		return (i);
+	}
+
+	int print_null(Buffer *buf, va_list v_ls )
+	{
+		char c;
+
+		c = va_arg(v_ls, int);
+		buf->str[buf->index++] = c;
+
 		if (buf->index == buf->size - 1)
 			print_buffer(buf);
+
+		return (1);
 	}
-	return i;
-}
-
-int print_null(Buffer *buf, va_list v_ls )
-{
-	char c;
-
-	c = va_arg(v_ls, int);
-	buf->str[buf->index++] = c;
-
-	if (buf->index == buf->size - 1)
-		print_buffer(buf);
-
-	return 1;
-}
 
 
-/**
- *print_char - used to print character
- *@list : list of va_list
- *
- *Return: integer value count of char
- */
+	/**
+	 *print_char - used to print character
+	 *@list : list of va_list
+	 *
+	 *Return: integer value count of char
+	 */
 
-int print_char(Buffer *buf,va_list list)
-{
-	char c;
+	int print_char(Buffer *buf,va_list list)
+	{
+		char c;
 
-	c = va_arg(list, int);
+		c = va_arg(list, int);
 
-	buf->str[buf->index++] = c;
+		buf->str[buf->index++] = c;
 
-	if (buf->index == buf->size - 1)
-		print_buffer(buf);	
+		if (buf->index == buf->size - 1)
+			print_buffer(buf);	
 
-	return (1);
-}
+		return (1);
+	}
 
-/**
- *print_percent - function to print %
- *@list: list of va_list
- *
- *Return: integer 1
- */
+	/**
+	 *print_percent - function to print %
+	 *@list: list of va_list
+	 *
+	 *Return: integer 1
+	 */
 
-int print_percent(Buffer *buf ,va_list list)
-{
-	buf->str[buf->index++] = '%';
+	int print_percent(Buffer *buf ,va_list list)
+	{
+		buf->str[buf->index++] = '%';
 
-	if (buf->index == buf->size - 1)
-		print_buffer(buf);
+		if (buf->index == buf->size - 1)
+			print_buffer(buf);
 
-	return 1;
-}
+		return (1);
+	}

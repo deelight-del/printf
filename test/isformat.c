@@ -9,6 +9,8 @@
  */
 bool isformatvalid(const char *format)
 {
+	if (!format)
+		return (NULL);
 	if (format == NULL || format[0] == '\0')
 		return (false);
 	while (*format)
@@ -44,3 +46,4 @@ bool isformatvalid(const char *format)
 	}
 	return (true);
 }
+

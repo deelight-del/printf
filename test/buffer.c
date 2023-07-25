@@ -23,6 +23,11 @@ Buffer *new_buffer()
 	buf->size = 1024;
 	buf->str = malloc(sizeof(char) * buf->size + 1);
 
+	if (!buf->str)
+	{
+		free (buf);
+		return (NULL);
+	}
 	return (buf);
 }
 
