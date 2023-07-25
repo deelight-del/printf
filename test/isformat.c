@@ -35,15 +35,9 @@ bool isformatvalid(const char *format)
 				case 's':
 				case 'p':
 				case '%':
-					{
-						break;
-					}
-			/**
-			* default:
-			*		{
-			*			return (false);
-			*		}
-			*/
+				break;
+				default:
+				return (false);
 			}
 		}
 		format++;
