@@ -34,7 +34,6 @@ int _printf(const char *format, ...)
 			n = 1;
 			ret += get_specifiers(format[i + n],buf,&args);
 			i += n;
-			i++;
 		}
 		else
 		{
@@ -42,9 +41,10 @@ int _printf(const char *format, ...)
 			if (buf->index == buf->size - 1)
 				print_buffer(buf);
 			i++;
-			buf->index++;
 			ret++;
 		}
+		i++;
+		buf->index++;
 	}
 	va_end(args);
 	print_buffer(buf);
@@ -75,7 +75,6 @@ int print_str(Buffer *buf, va_list list)
 		buf->str[buf->index] = str[i];
 		if (buf->index == buf->size - 1)
 			print_buffer(buf);
-		buf->index++;
 		i++;
 	}
 	return (i);
@@ -94,7 +93,6 @@ int print_null(Buffer *buf, va_list v_ls )
 		i++;
 		if (buf->index == buf->size - 1)
 			print_buffer(buf);
-		buf->index++;
 	}
 
 	return (i);
@@ -118,7 +116,6 @@ int print_char(Buffer *buf, va_list list)
 
 	if (buf->index == buf->size - 1)
 		print_buffer(buf);
-	buf->index++;
 	return (1);
 }
 
@@ -137,7 +134,6 @@ int print_percent(Buffer *buf, va_list list)
 
 	if (buf->index == buf->size - 1)
 		print_buffer(buf);
-	buf->index++;
 
 	return (1);
 }
