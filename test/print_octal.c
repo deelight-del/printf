@@ -31,7 +31,7 @@ int count_octal(unsigned int num)
   *Return: 0, if successful
 */
 
-int print_octal(unsigned int num, Betty *buf)
+int print_octal(unsigned int num, Buffer *buf)
 {
 /*	if (num < 0)
 *	{
@@ -55,14 +55,14 @@ int print_octal(unsigned int num, Betty *buf)
   *Return: returns the length of the supposed number
 */
 
-int print_count_octal(va_list list)
+int print_count_octal(Buffer *buf, va_list list)
 {
 	unsigned int num = va_arg(list, unsigned int);
 	int ret = count_octal(num);
 
 	printf("Digit under consideration is %u\n", num);
 
-	print_octal(num);
+	print_octal(num, buf);
 
 	return (ret);
 }

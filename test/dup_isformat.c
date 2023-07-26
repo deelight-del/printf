@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdbool.h>
+#include "main.h"
 /**
  * isformatvalid - function to print the format string, and with respective
  * formatting specifier.
@@ -18,24 +19,6 @@ bool isformatvalid(const char *format)
 			format++;
 			switch (*format)
 			{
-			/*	case 'c':
-				case 'd':
-				case 'i':
-				case 'o':
-				case 'u':
-				case 'x':
-				case 'X':
-				case 'f':
-				case 'e':
-				case 'E':
-				case 'g':
-				case 'G':
-				case 'a':
-				case 'A':
-				case 's':
-				case 'p':
-				case '%':
-				break;*/
 				case ' ':
 					return (false);
 				case '\0':

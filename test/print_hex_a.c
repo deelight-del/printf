@@ -60,14 +60,14 @@ int print_hex_a(unsigned int num)
   *Return: returns the length of the supposed number
 */
 
-int print_count_hexa(va_list list)
+int print_count_hexa(Buffer *buf, va_list list)
 {
 	unsigned int num = va_arg(list, unsigned int);
 	int ret = count_hex_a(num);
 
 	printf("Digit under consideration is %u\n", num);
 
-	print_octal(num);
+	print_octal(num, buf);
 
 	return (ret);
 }

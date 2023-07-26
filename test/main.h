@@ -6,7 +6,6 @@
 #include <unistd.h>
 int int_count(int num);
 bool isformatvalid(const char *format);
-<<<<<<< HEAD
 /*int get_specifiers1(char, va_list);
 int print_null1(char *str);
 int print_percent1(va_list list);
@@ -18,15 +17,10 @@ int print_count_binary1(va_list list);*/
 int u_count(unsigned int num);
 /*int print_count_u(va_list list);*/
 int count_octal(unsigned int num);
-int print_octal(unsigned int num);
-int print_count_octal(va_list list);
 int count_hex_a(unsigned int num);
 int print_hex_a(unsigned int num);
-int print_count_hexa(va_list list);
 bool is_specifier(char c);
 
-=======
->>>>>>> 5558fa050ef73976b9e2b2ab78141bf417b07232
 typedef struct call_buffer
 {
 	char* str;
@@ -55,7 +49,9 @@ int print_count_binary(Buffer *buf, va_list list);
 int print_binary(unsigned int, Buffer *buf);
 void print_unsigned( unsigned int num, Buffer *buf);
 int print_count_u(Buffer *buf, va_list list);
-
+int print_octal(unsigned int num, Buffer *buf);
+int print_count_octal( Buffer *buf, va_list list);
 void print_int(int num,Buffer*);
+int print_count_hexa(Buffer *buf, va_list list);
 #endif
 
