@@ -49,6 +49,7 @@ int print_count_u(Buffer *buf, va_list list)
 
 	print_unsigned(num, buf);
 	ret = u_count(num);
+	buf->index++;
 
 	return (ret);
 }

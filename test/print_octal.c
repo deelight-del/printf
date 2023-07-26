@@ -31,7 +31,7 @@ int count_octal(unsigned int num)
   *Return: 0, if successful
 */
 
-int print_octal(unsigned int num)
+int print_octal(unsigned int num, Betty *buf)
 {
 /*	if (num < 0)
 *	{
@@ -41,7 +41,7 @@ int print_octal(unsigned int num)
 */
 
 	if (num / 8 != 0)
-		print_octal(num / 8);
+		print_octal(num / 8, buf);
 
 	putchar((num % 8) + 48);
 

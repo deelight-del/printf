@@ -9,6 +9,8 @@
  */
 bool isformatvalid(const char *format)
 {
+	if (!format)
+		return (NULL);
 	if (format == NULL || format[0] == '\0')
 		return (false);
 	while (*format)
@@ -48,6 +50,7 @@ bool isformatvalid(const char *format)
 	}
 	return (true);
 }
+<<<<<<< HEAD
 		
 
 /**
@@ -86,3 +89,6 @@ bool is_specifier(char c)
 
 	return (true);
 }
+=======
+
+>>>>>>> 5558fa050ef73976b9e2b2ab78141bf417b07232
