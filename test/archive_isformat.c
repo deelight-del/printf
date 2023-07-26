@@ -18,7 +18,7 @@ bool isformatvalid(const char *format)
 			format++;
 			switch (*format)
 			{
-			/*	case 'c':
+				case 'c':
 				case 'd':
 				case 'i':
 				case 'o':
@@ -35,54 +35,18 @@ bool isformatvalid(const char *format)
 				case 's':
 				case 'p':
 				case '%':
-				break;*/
-				case ' ':
-					return (false);
-				case '\0':
-					return (false);
-				default:
-					break;
+					{
+						break;
+					}
+				/**
+				*default:
+				*	{
+				*		return (false);
+				*	}
+				*/
 			}
 		}
 		format++;
 	}
-	return (true);
-}
-		
-
-/**
- * isspecifier - function determine if a next word is a specifier
- * formatting specifier.
- * @c: char to test
- *
-*/
-
-bool is_specifier(char c)
-{
-	switch (c)
-	{
-		case 'c':
-		case 'd':
-		case 'i':
-		case 'b':
-		case 'o':
-		case 'u':
-		case 'x':
-		case 'X':
-		case 'f':
-		case 'e':
-		case 'E':
-		case 'g':
-		case 'G':
-		case 'a':
-		case 'A':
-		case 's':
-		case 'p':
-		case '%':
-			break;
-		default:
-			return (false);
-	}
-
 	return (true);
 }

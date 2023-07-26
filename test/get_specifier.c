@@ -9,7 +9,7 @@
  * Return: an integer to return the specifier
  */
 
-int get_specifiers(char s,Buffer *buf, va_list *list)
+int get_specifiers(char s, Buffer *buf, va_list *list)
 {
 	int i, ret = 0;
 	spec spec_ar[] = {
@@ -18,7 +18,7 @@ int get_specifiers(char s,Buffer *buf, va_list *list)
 		{'d', print_count_int},
 		{'i', print_count_int},	
 		{'%', print_percent},
-		{'b', print_binary},
+		{'b', print_count_binary},
 		{'u', print_count_u},
 		{'\0', NULL}
 	};

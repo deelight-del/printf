@@ -11,27 +11,39 @@ int main(void)
 {
 	int len;
 
-	len = _printf("great, %s\n", "");
+	printf("Testing for strings, note printf first\n");
+	len = printf("great, %s\n", "man");
 	printf("%d\n", len);
-	len = _printf("great, %s\n", NULL);
+	len = _printf("great, %s\n", "man");
 	printf("%d\n", len);
-	len = _printf("", "good", "bad\n");
+
+
+	printf("Testing for chars\n");
+	len = printf("Africa LX is given as, %c%c%c\n", 'A', 'L', 'X');
 	printf("%d\n", len);
-	len = _printf(" \n", 2, 6, "ALX\n");
+	len = _printf("Africa LX is given as, %c%c%c\n", 'A', 'L', 'X');
 	printf("%d\n", len);
-	len = printf("This is a %s/%s boy%c\n", "good", "bad", 's');
+	
+	printf("Testing for ints and digits\n");
+	len = printf(" 2 + 2 is the same as %d or %i\n", 4, 1234);
 	printf("%d\n", len);
-	len = printf("Africa leadership is abbrev as %c%c%c", 'A', 'L', 'X');
+	len = _printf(" 2 + 2 is the same as %d or %i\n", 4, 1234);
 	printf("%d\n", len);
-	len = printf("%c\n", 'A');
+
+
+	printf("Testing for unsigned int\n");
+	len = printf(" 2 + 2 is the same as %u or %u\n", 4, 40004);
 	printf("%d\n", len);
-	len = printf("great, %s\n", "");
+	len = _printf(" 2 + 2 is the same as %u or %i\n", 4, 40004);
 	printf("%d\n", len);
-	len = _printf("This %k is a %s/%s boy%c\n", "good", "bad", 's');
+
+
+	printf("Testing for binary\n");
+	len = printf(" The binary for the digit %d is %b\n", 78, 78);
 	printf("%d\n", len);
-        len = _printf("Africa leadership is abbrev as %c%c%c%", 'A', 'L', 'X');
+	len = _printf(" The binary for the digit %d is %b\n", 78, 78);
 	printf("%d\n", len);
-	len = _printf("%c\n", 'A');
-	printf("%d", len);
 	return (0);
+
+
 }

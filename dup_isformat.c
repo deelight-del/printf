@@ -64,7 +64,6 @@ bool is_specifier(char c)
 		case 'c':
 		case 'd':
 		case 'i':
-		case 'b':
 		case 'o':
 		case 'u':
 		case 'x':

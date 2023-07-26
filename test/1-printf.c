@@ -30,11 +30,12 @@ void print_int(int num, Buffer *buf)
  *         */
 int print_count_int(Buffer *buf, va_list list)
 {
-	int num;
+	int num, ret;
 
 	num = va_arg(list, int);
 	print_int(num,buf);
-	return int_count(num);
+	ret = int_count(num);
+	return (ret);
 }
 
 /**

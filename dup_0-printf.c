@@ -13,12 +13,12 @@
 
 int _printf(const char *format, ...)
 {
-	int ret;
+	int ret, n, i = 0;
 	va_list args;
 	Buffer *buf;
 
-	/*if (isformatvalid(format))
-		return (-1);*/
+	if (!isformatvalid(format))
+		return (-1);
 
 	buf = new_buffer();
 	if (buf == NULL)
@@ -27,25 +27,27 @@ int _printf(const char *format, ...)
 	ret = 0;
 
 	va_start(args, format);
-	while (format && format[buf->index])
+	while (format[i])
 	{
-		if (format[buf->index] == '%')
+		if (format[i] == '%' && is_specifier(format[i + 1]))
 		{
-			buf->index++;
-			ret += get_specifiers(format[buf->index],buf,&args);
-			buf->index++;
+			n = 1;
+			ret += get_specifiers(format[i + n],buf,&args);
+			i += n;
+			i++;
 		}
 		else
 		{
-			buf->str[buf->index++] = format[ret];/*why not index*/
+			buf->str[buf->index] = format[i];
 			if (buf->index == buf->size - 1)
 				print_buffer(buf);
+			i++;
+			buf->index++;
 			ret++;
 		}
 	}
 	va_end(args);
 	print_buffer(buf);
-	ret += buf->index;
 	free(buf->str);
 	free(buf);	
 	return (ret);
@@ -70,24 +72,32 @@ int print_str(Buffer *buf, va_list list)
 	i = 0;
 	while (str[i])
 	{
-		buf->str[buf->index++] = str[i++];
+		buf->str[buf->index] = str[i];
 		if (buf->index == buf->size - 1)
 			print_buffer(buf);
+		buf->index++;
+		i++;
 	}
 	return (i);
 }
 
 int print_null(Buffer *buf, va_list v_ls )
 {
-	char c;
+	char *c = "(null)";
+	int i = 0;
 
-	c = va_arg(v_ls, int);
-	buf->str[buf->index++] = c;/*hmm*/
+	(void) v_ls;
+	
+	for(; *c != '\0'; c++)
+	{
+		buf->str[buf->index] = *c;
+		i++;
+		if (buf->index == buf->size - 1)
+			print_buffer(buf);
+		buf->index++;
+	}
 
-	if (buf->index == buf->size - 1)
-		print_buffer(buf);
-
-	return (1);
+	return (i);
 }
 
 
@@ -98,17 +108,17 @@ int print_null(Buffer *buf, va_list v_ls )
  *Return: integer value count of char
  */
 
-int print_char(Buffer *buf,va_list list)
+int print_char(Buffer *buf, va_list list)
 {
 	char c;
 
 	c = va_arg(list, int);
 
-	buf->str[buf->index++] = c;
+	buf->str[buf->index] = c;
 
 	if (buf->index == buf->size - 1)
-		print_buffer(buf);	
-
+		print_buffer(buf);
+	buf->index++;
 	return (1);
 }
 
@@ -119,14 +129,15 @@ int print_char(Buffer *buf,va_list list)
  *Return: integer 1
  */
 
-int print_percent(Buffer *buf ,va_list list)
+int print_percent(Buffer *buf, va_list list)
 {
 	(void) list;
 
-	buf->str[buf->index++] = '%';
+	buf->str[buf->index] = '%';
 
 	if (buf->index == buf->size - 1)
 		print_buffer(buf);
+	buf->index++;
 
-	return 1;
+	return (1);
 }
