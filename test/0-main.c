@@ -1,6 +1,5 @@
-#include "main.h"
 #include <stdio.h>
-
+#include "main.h"
 /**
   *main - To test our printf function is doing as we wish
   *
