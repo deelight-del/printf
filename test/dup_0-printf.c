@@ -1,14 +1,13 @@
-
 #include <string.h>
 #include <stdarg.h>
 #include "main.h"
 /**
- *_printf - function to print the format string, and with respective
- *formatting specifier.
- *@format: this is the string containing the format and string to print
- *
- *Return: length of format string
- */
+ *  *_printf - function to print the format string, and with respective
+ *   *formatting specifier.
+ *    *@format: this is the string containing the format and string to print
+ *     *
+ *      *Return: length of format string
+ *       */
 
 int _printf(const char *format, ...)
 {
@@ -33,6 +32,7 @@ int _printf(const char *format, ...)
 			n = 1;
 			ret += get_specifiers(format[i + n],buf,&args);
 			i += n;
+			i++;
 		}
 		else
 		{
@@ -40,10 +40,9 @@ int _printf(const char *format, ...)
 			if (buf->index == buf->size - 1)
 				print_buffer(buf);
 			i++;
+			buf->index++;
 			ret++;
 		}
-		i++;
-		buf->index++;
 	}
 	va_end(args);
 	print_buffer(buf);
@@ -53,11 +52,11 @@ int _printf(const char *format, ...)
 }
 
 /**
- *print_str - used to print a string within string
- *@list:- list of va_list
- *
- *Return: null
- */
+ *  *print_str - used to print a string within string
+ *   *@list:- list of va_list
+ *    *
+ *     *Return: null
+ *      */
 
 int print_str(Buffer *buf, va_list list)
 {
@@ -74,6 +73,7 @@ int print_str(Buffer *buf, va_list list)
 		buf->str[buf->index] = str[i];
 		if (buf->index == buf->size - 1)
 			print_buffer(buf);
+		buf->index++;
 		i++;
 	}
 	return (i);
@@ -85,13 +85,14 @@ int print_null(Buffer *buf, va_list v_ls )
 	int i = 0;
 
 	(void) v_ls;
-	
+
 	for(; *c != '\0'; c++)
 	{
 		buf->str[buf->index] = *c;
 		i++;
 		if (buf->index == buf->size - 1)
 			print_buffer(buf);
+		buf->index++;
 	}
 
 	return (i);
@@ -99,11 +100,11 @@ int print_null(Buffer *buf, va_list v_ls )
 
 
 /**
- *print_char - used to print character
- *@list : list of va_list
- *
- *Return: integer value count of char
- */
+ *  *print_char - used to print character
+ *   *@list : list of va_list
+ *    *
+ *     *Return: integer value count of char
+ *      */
 
 int print_char(Buffer *buf, va_list list)
 {
@@ -115,15 +116,16 @@ int print_char(Buffer *buf, va_list list)
 
 	if (buf->index == buf->size - 1)
 		print_buffer(buf);
+	buf->index++;
 	return (1);
 }
 
 /**
- *print_percent - function to print %
- *@list: list of va_list
- *
- *Return: integer 1
- */
+ *  *print_percent - function to print %
+ *   *@list: list of va_list
+ *    *
+ *     *Return: integer 1
+ *      */
 
 int print_percent(Buffer *buf, va_list list)
 {
@@ -133,6 +135,7 @@ int print_percent(Buffer *buf, va_list list)
 
 	if (buf->index == buf->size - 1)
 		print_buffer(buf);
+	buf->index++;
 
 	return (1);
 }
