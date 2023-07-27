@@ -2,7 +2,7 @@
 #include "main.h"
 #include <string.h>
 #include <stdarg.h>
-#include <stddef.h>
+#include  <stddef.h>
 #include <limits.h>
 
 /**
@@ -10,7 +10,7 @@
  * @num: numbers to print
  *
  * Return: nothing
- */
+ *
 int print_int(int num, Buffer *buf)
 {
 	int len, i;
@@ -57,7 +57,6 @@ int print_int(int num, Buffer *buf)
 	}
 	return (0);
 }
-/**
  *   *print_count_int - Function to print and count integer
  *     *@list: list of va_list
  *       *
