@@ -14,7 +14,7 @@ bool isformatvalid(const char *format);
 int print_null1(char *str);
 int print_percent1(va_list list);
 */
-int count_binary(long unsigned int num);
+int count_binary(unsigned int num);
 /*int print_binary1(unsigned int num);
 int print_count_binary1(va_list list);*/
 /*void print_unsigned(unsigned int num);*/
@@ -53,7 +53,7 @@ int print_percent(Buffer *buf,va_list list);
 int print_char(Buffer *buf,va_list list);
 int print_count_int(Buffer *, va_list);
 int print_count_binary(Buffer *buf, va_list list);
-int print_binary(long unsigned int, Buffer *buf);
+int print_binary(unsigned int, Buffer *buf);
 void print_unsigned( unsigned int num, Buffer *buf);
 int print_count_u(Buffer *buf, va_list list);
 int print_octal(unsigned int num, Buffer *buf);

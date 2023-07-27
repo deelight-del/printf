@@ -8,7 +8,7 @@
   *Return: Count of the binary it is printing
 */
 
-int count_binary(long unsigned int num)
+int count_binary(unsigned int num)
 {
 	int i = 0;
 
@@ -33,7 +33,7 @@ int count_binary(long unsigned int num)
   *Return: zero, if true
 */
 
-int print_binary(long unsigned int num, Buffer *buf)
+int print_binary(unsigned int num, Buffer *buf)
 {
 	int len, i;
 
@@ -58,7 +58,7 @@ int print_binary(long unsigned int num, Buffer *buf)
 
 int print_count_binary(Buffer *buf, va_list list)
 {
-	long unsigned int num = va_arg(list, long unsigned int);
+	long unsigned int num = va_arg(list, unsigned int);
 	int ret = count_binary(num);
 
 	print_binary(num, buf);
