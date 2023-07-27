@@ -11,6 +11,7 @@
  *
  * Return: nothing
  *
+ */
 int print_int(int num, Buffer *buf)
 {
 	int len, i;
@@ -57,6 +58,7 @@ int print_int(int num, Buffer *buf)
 	}
 	return (0);
 }
+/*
  *   *print_count_int - Function to print and count integer
  *     *@list: list of va_list
  *       *
