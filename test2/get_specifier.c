@@ -20,9 +20,6 @@ int get_specifiers(char s, Buffer *buf, va_list *list)
 		{'%', print_percent},
 		{'b', print_count_binary},
 		{'u', print_count_u},
-		{'o', print_count_octal},
-		{'x', print_count_hexa},
-		{'X', print_count_hexA},
 		{'\0', NULL}
 	};
 	for (i = 0; spec_ar[i].op != '\0'; i++)
