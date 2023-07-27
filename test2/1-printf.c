@@ -2,27 +2,63 @@
 #include "main.h"
 #include <string.h>
 #include <stdarg.h>
+#include  <stddef.h>
+#include <limits.h>
 
 /**
  * print_int - function to print integers.
  * @num: numbers to print
  *
  * Return: nothing
+ *
  */
-void print_int(int num, Buffer *buf)
+int print_int(int num, Buffer *buf)
 {
-	int ch;
+	int len, i;
+
 	if (num < 0)
 	{
-		buf->str[buf->index++] = '-';
-		num = -num;
+		buf->str[buf->index] = '-';
+		buf->index++;
+
+		if (num == INT_MIN)
+		{
+			num = INT_MAX;
+			len = int_count(num);
+			buf->index += (len - 1);
+			buf->str[buf->index] = (num % 10) + 49;
+			num /= 10;
+		}
+		else
+		{
+			num = -num;
+			len = int_count(num);
+			buf->index += (len - 1);
+			buf->str[buf->index] = (num % 10) + 48;
+			num /= 10;
+			
+		}
+
+		for (i = 1; i < len; i++)
+		{
+			buf->str[buf->index - i] = (num % 10) + 48; 
+			num /= 10;
+		}
+		return (0);
+
 	}
-	if (num / 10)
-		print_int(num / 10, buf);
-	ch = (num % 10) + 48;
-	buf->str[buf->index++] = ch;
+
+	len = int_count(num);
+	buf->index += (len - 1);
+
+	for (i = 0; i < len; i++)
+	{
+		buf->str[buf->index - i] = (num % 10) + 48; 
+		num /= 10;
+	}
+	return (0);
 }
-/**
+/*
  *   *print_count_int - Function to print and count integer
  *     *@list: list of va_list
  *       *

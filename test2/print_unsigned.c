@@ -11,12 +11,16 @@
  */
 void print_unsigned(unsigned int num, Buffer *buf)
 {
-	int ch;
+	int len, i;
 
-	if (num / 10)
-		print_unsigned(num / 10, buf);
-	ch = (num % 10) + 48;
-	buf->str[buf->index++] = ch;
+	len = u_count(num);
+	buf->index += (len - 1);
+
+	for (i = 0; i < len; i++)
+	{
+		buf->str[buf->index - i] = (num % 10) + 48;
+		num = num / 10;
+	}
 }
 
 /**

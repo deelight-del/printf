@@ -70,6 +70,7 @@ bool is_specifier(char c)
 		case 'X':
 		case 'f':
 		case 'e':
+		case 'b':
 		case 'E':
 		case 'g':
 		case 'G':

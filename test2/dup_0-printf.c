@@ -31,6 +31,7 @@ int _printf(const char *format, ...)
 	{
 		if (format[i] == '%' && is_specifier(format[i + 1]))
 		{
+			/*buf->index++;*/
 			n = 1;
 			ret += get_specifiers(format[i + n],buf,&args);
 			i += n;
@@ -40,11 +41,10 @@ int _printf(const char *format, ...)
 			buf->str[buf->index] = format[i];
 			if (buf->index == buf->size - 1)
 				print_buffer(buf);
-			i++;
 			ret++;
 		}
-		i++;
 		buf->index++;
+		i++;
 	}
 	va_end(args);
 	print_buffer(buf);
@@ -72,11 +72,12 @@ int print_str(Buffer *buf, va_list list)
 	i = 0;
 	while (str[i])
 	{
-		buf->str[buf->index] = str[i];
+		buf->str[buf->index++] = str[i];
 		if (buf->index == buf->size - 1)
 			print_buffer(buf);
 		i++;
 	}
+	buf->index--;
 	return (i);
 }
 
@@ -89,11 +90,12 @@ int print_null(Buffer *buf, va_list v_ls )
 	
 	for(; *c != '\0'; c++)
 	{
-		buf->str[buf->index] = *c;
+		buf->str[buf->index++] = *c;
 		i++;
 		if (buf->index == buf->size - 1)
 			print_buffer(buf);
 	}
+	buf->index--;
 
 	return (i);
 }
@@ -134,6 +136,5 @@ int print_percent(Buffer *buf, va_list list)
 
 	if (buf->index == buf->size - 1)
 		print_buffer(buf);
-
 	return (1);
 }
