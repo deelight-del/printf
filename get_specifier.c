@@ -16,6 +16,7 @@ int get_specifiers(char s, Buffer *buf, va_list *list)
 		{'c', print_char},
 		{'s', print_str},
 		{'d', print_count_int},
+		{'S', print_custom_str1},
 		{'i', print_count_int},	
 		{'%', print_percent},
 		{'b', print_count_binary},

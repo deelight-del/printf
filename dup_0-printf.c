@@ -81,13 +81,74 @@ int print_str(Buffer *buf, va_list list)
 	return (i);
 }
 
+	int
+print_custom_str1 (Buffer * buf, va_list list)
+{
+	char *str;
+	int i, j, val, k, hex[2], len = 0;
+	str = va_arg (list, char *);
+
+	if (!str|| str[0]== '\0' ){
+		buf->str[buf->index++] = '\n';
+
+		return 0;
+	}
+	i = 0;
+	while (str[i])
+	{
+
+		if (str[i] < 32 || str[i] > 126)
+		{
+			buf->str[buf->index++] = '\\';
+			buf->str[buf->index++] = 'x';
+			len += 3;
+			if (str[i] < 16)
+			{
+				buf->str[buf->index] = '0';
+				len += 1;
+			}
+			else
+			{
+				len += 1;
+			}
+			val = str[i];
+			for (j = 1; j >= 0; j--)
+			{
+				hex[j] = val % 16;
+				val /= 16;
+			}
+			for (k = 0; k < 2; k++)
+			{
+				if (hex[k] < 10)
+				{
+					buf->str[buf->index++] = hex[k] + '0';
+
+				}
+				else
+				{
+					buf->str[buf->index++] = hex[k] - 10 + 'A';
+
+				}
+			}
+		}
+		else
+		{
+			buf->str[buf->index++] = str[i];
+			len++;
+		}
+		i++;
+	}
+
+	return len;
+}
+
 int print_null(Buffer *buf, va_list v_ls )
 {
 	char *c = "(null)";
 	int i = 0;
 
 	(void) v_ls;
-	
+
 	for(; *c != '\0'; c++)
 	{
 		buf->str[buf->index++] = *c;

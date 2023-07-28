@@ -77,6 +77,7 @@ bool is_specifier(char c)
 		case 'a':
 		case 'A':
 		case 's':
+		case 'S':	
 		case 'p':
 		case '%':
 			break;

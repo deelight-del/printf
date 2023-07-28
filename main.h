@@ -62,6 +62,7 @@ int print_hex_a(unsigned int num, Buffer *buf);
 int print_count_hexa(Buffer *buf, va_list list);
 int print_count_hexA(Buffer *buf, va_list list);
 int print_hex_A(unsigned int num, Buffer *buf);
+int print_custom_str1(Buffer *buf, va_list list);
 
 int print_int(int num,Buffer*);
 #endif
